@@ -9,7 +9,7 @@
   </div>
   <h1>Powerful MCP Tools for Solr</h1>
   <p>
-    11 tools and 2 resources that let AI assistants search, index, and manage your Solr collections through natural language.
+    11 tools, 6 prompts, 2 resources, and 1 completion that let AI assistants search, index, and manage your Solr collections through natural language.
   </p>
   <div class="down-arrow"><a data-scroll href="#tools"><i class="fa fa-angle-down fa-2x red"></i></a></div>
 </div>
@@ -105,6 +105,56 @@
   </div>
 </section>
 
+<section class="gray offset-small" id="prompts">
+  <div class="row">
+    <div class="large-10 large-offset-1 columns">
+      <div class="annotation">MCP Prompts</div>
+      <h1>Workflow Templates</h1>
+      <p>MCP Prompts are reusable workflow templates that the AI client surfaces as slash-command-style entry points. Each prompt points the LLM at the right tools in the right order and embeds user-supplied arguments.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-10 large-offset-1 columns" style="text-align:left;">
+      <table style="width:100%">
+        <thead><tr><th>Prompt</th><th>Arguments</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>explore-collections</code></td>
+            <td>&mdash;</td>
+            <td>Read-only walkthrough: list collections, inspect their schemas, check health. Use when investigating what's available.</td>
+          </tr>
+          <tr>
+            <td><code>setup-collection</code></td>
+            <td><code>name</code>, <code>purpose</code> (optional)</td>
+            <td>Create a new collection with sensible defaults (configset <code>_default</code>, 1 shard, 1 replica), then suggest schema fields based on the stated purpose.</td>
+          </tr>
+          <tr>
+            <td><code>view-schema</code></td>
+            <td><code>collection</code></td>
+            <td>Read-only schema introspection. Fetches the schema and summarises field definitions, dynamic fields, and copy fields.</td>
+          </tr>
+          <tr>
+            <td><code>design-schema</code></td>
+            <td><code>collection</code>, <code>datasetDescription</code>, <code>sampleDocument</code> (optional)</td>
+            <td>Propose and apply schema fields/field types for a described dataset, leveraging <code>add-fields</code> and <code>add-field-types</code>.</td>
+          </tr>
+          <tr>
+            <td><code>index-data</code></td>
+            <td><code>collection</code>, <code>format</code> (json/csv/xml), <code>sample</code> (optional)</td>
+            <td>Walks through indexing documents in the chosen format, branching to the right <code>index-*-documents</code> tool.</td>
+          </tr>
+          <tr>
+            <td><code>search-collection</code></td>
+            <td><code>collection</code>, <code>question</code></td>
+            <td>Translate a natural-language question into a Solr query, including filter queries, faceting, and pagination as appropriate.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <section class="gray offset-small" id="resources">
   <div class="row">
     <div class="large-10 large-offset-1 columns">
@@ -126,6 +176,30 @@
           <tr>
             <td><code>solr://{collection}/schema</code></td>
             <td>Schema definition for a specific collection. Supports autocompletion&mdash;MCP clients can query for available collection names.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="gray offset-small" id="completions">
+  <div class="row">
+    <div class="large-10 large-offset-1 columns">
+      <div class="annotation">MCP Completions</div>
+      <h1>Argument Autocompletion</h1>
+      <p>MCP Completions let clients query the server for valid values when filling in resource URI placeholders. The Solr MCP server exposes one completion today, with more planned as new templated resources are introduced.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-10 large-offset-1 columns" style="text-align:left;">
+      <table style="width:100%">
+        <thead><tr><th>Completion Target</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>solr://{collection}/schema</code> &rarr; <code>{collection}</code></td>
+            <td>Returns the live list of collection names from Solr so MCP clients can offer them as completion candidates when a user is composing a schema resource URI.</td>
           </tr>
         </tbody>
       </table>
