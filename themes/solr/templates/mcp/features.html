@@ -9,7 +9,7 @@
   </div>
   <h1>Powerful MCP Tools for Solr</h1>
   <p>
-    9 tools and 2 resources that let AI assistants search, index, and manage your Solr collections through natural language.
+    11 tools and 2 resources that let AI assistants search, index, and manage your Solr collections through natural language.
   </p>
   <div class="down-arrow"><a data-scroll href="#tools"><i class="fa fa-angle-down fa-2x red"></i></a></div>
 </div>
@@ -89,6 +89,14 @@
           <tr>
             <td><code>get-schema</code></td>
             <td>Retrieve the complete schema definition: field definitions, field types, dynamic fields, copy fields, unique key, and schema attributes.</td>
+          </tr>
+          <tr>
+            <td><code>add-fields</code></td>
+            <td>Add one or more fields to a collection's schema atomically. Each field is a map matching Solr's <code>add-field</code> JSON shape (required <code>name</code> and <code>type</code>, plus optional <code>stored</code>, <code>indexed</code>, <code>docValues</code>, <code>multiValued</code>, etc.). Additive only &mdash; existing fields cannot be modified.</td>
+          </tr>
+          <tr>
+            <td><code>add-field-types</code></td>
+            <td>Add one or more field types atomically. Each map matches Solr's <code>add-field-type</code> shape with required <code>name</code> and <code>class</code>, plus optional <code>analyzer</code> (or separate <code>indexAnalyzer</code> + <code>queryAnalyzer</code>). Supports custom analyzer chains, <code>solr.DenseVectorField</code> for semantic search, autocomplete patterns, and more.</td>
           </tr>
         </tbody>
       </table>
